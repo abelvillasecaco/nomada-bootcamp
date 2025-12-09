@@ -1,0 +1,20 @@
+$shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+$accent: var(--accent);
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+
+  .header {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .body {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+}

@@ -1,0 +1,83 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <label>Username: </label>
+    <input formControlName="username">
+
+    @if (usernameControl?.touched || usernameControl?.dirty) {
+      @if (usernameControl?.errors?.['required']) {
+        <small>El usuario es obligatorio</small>
+      }
+      @if (usernameControl?.errors?.['minlength']) {
+        <small>
+          Mínimo {{usernameControl?.errors?.['minlength'].requiredLength}} caracteres.
+          (tienes {{usernameControl?.errors?.['minlength'].actualLength}})
+        </small>
+      }
+      @if (usernameControl?.errors?.['pattern']) {
+        <small>El usuario solo puede contener caracteres alfanuméricos</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input formControlName="email">
+
+    @if (form.get('email')?.touched) {
+      @if (form.get('email')?.errors?.['required']) {
+        <small>El email es obligatorio</small>
+      }
+      @if (form.get('email')?.errors?.['email']) {
+        <small>Introduce un email válido.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password">
+
+    @if (form.get('password')?.touched) {
+      @if (form.get('password')?.errors?.['required']) {
+        <small>La contraseña es obligatoria</small>
+      }
+      @if (form.get('password')?.errors?.['minlength']) {
+        <small>Debe tener al menos
+          {{ form.get('password')?.errors?.['minlength'].requiredLength }} caracteres.
+        </small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Edad</label>
+    <input type="number" formControlName="age">
+
+    @if (form.get('age')?.touched) {
+      @if (form.get('age')?.errors?.['min']) {
+        <small>Debe tener al menos {{ form.get('age')?.errors?.['min'].min }} años.</small>
+      }
+      @if (form.get('age')?.errors?.['max']) {
+        <small>La edad máxima es
+          {{ form.get('age')?.errors?.['max'].max }} años.
+        </small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" formControlName="acceptTerms">
+      Acepto los términos y condiciones
+    </label>
+
+
+    @if (form.get('acceptTerms')?.touched) {
+      @if (form.get('acceptTerms')?.errors?.['requiredTrue']) {
+        <small>Debes aceptar los términos.</small>
+      }
+    }
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Enviar</button>
+</form>

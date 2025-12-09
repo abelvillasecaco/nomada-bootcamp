@@ -1,0 +1,92 @@
+:host { display: block; padding: 12px; font-family: Inter, system-ui, sans-serif; }
+
+form {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 26px rgba(8, 15, 30, 0.06);
+  border: 1px solid #eef2f7;
+}
+
+label { display: block; margin-bottom: 6px; font-weight: 600; color: #102a43; }
+input[type="text"], input[type="number"], input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d7e0ea;
+  background: #fbfdff;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.lines { margin-top: 8px; }
+
+.line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fafbfc;
+  border: 1px solid #f1f5f9;
+}
+
+.line input[type="number"] { width: 110px; }
+
+.btn-del {
+  background: #e55353;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-add {
+  background: #198754;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-submit {
+  background: #0d6efd;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.actions { display:flex; gap:8px; justify-content:flex-end; margin-top: 8px; }
+
+.error {
+  color: #d63447;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.panel {
+  max-width: 720px;
+  margin: 18px auto 0;
+  background: #fbfdff;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eef3ff;
+}
+
+pre {
+  background: #0b1224;
+  color: #d8e2ff;
+  padding: 10px;
+  border-radius: 8px;
+  max-height: 220px;
+  overflow: auto;
+  font-size: 0.9rem;
+}

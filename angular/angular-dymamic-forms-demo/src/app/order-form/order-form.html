@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <label>Nombre del cliente: </label>
+  <input type="text" formControlName="customerName" placeholder="Ej. Abel Villaseca">
+  @if (customerNameControl()?.touched && customerNameControl()?.invalid) {
+    @if (customerNameControl()?.errors?.['required']) {
+      <div class="error">El nombre es obligatorio.</div>
+    }
+    @if (customerNameControl()?.errors?.['minlength']) {
+      <div class="error">El nombre debe tener al menos 3 caracteres.</div>
+    }
+  }
+
+  <h3>Líneas de pedido</h3>
+
+  <div formArrayName="orderLines" class="lines">
+    @for (line of orderLines.controls; track line; let i = $index) {
+      <div [formGroupName]="i" class="line">
+        <input type="text" formControlName="product" placeholder="Producto">
+        <input type="number" formControlName="quantity" min="1">
+        <button type="button" class="btn-del" (click)="removeLine(i)">Eliminar</button>
+
+        @if (line.touched && line.invalid) {
+          @if (line.get('product')?.errors?.['required']) {
+            <div class="error">El producto es obligatorio.</div>
+          }
+          @if (line.get('quantity')?.errors?.['required']) {
+            <div class="error">La cantidad es obligatoria.</div>
+          }
+          @if (line.get('quantity')?.errors?.['min']) {
+            <div class="error">Cantidad mínima:1.</div>
+          }
+        }
+      </div>
+    }
+  </div>
+
+  @if (orderLines.errors?.['minOne']) {
+    <div class="error">Debe existir al menos una línea de pedido.</div>
+  }
+
+  <div>
+    <button type="button" class="btn-add" (click)="addLine()">Añadir línea</button>
+    <button type="submit" class="btn-submit" [disabled]="form.invalid">Enviar pedido</button>
+  </div>
+</form>
+
+<section>
+  <h4>Valor (live)</h4>
+  <pre>{{ liveValue | json }}</pre>
+
+  <h4>Estado (live)</h4>
+  <pre>{{ liveStatus }}</pre>
+</section>

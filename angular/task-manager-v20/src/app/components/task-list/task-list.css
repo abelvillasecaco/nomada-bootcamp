@@ -1,0 +1,48 @@
+.container {
+  max-width: 500px;
+  margin: 2rem auto;
+  font-family: sans-serif;
+}
+
+
+.card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.card.done {
+  background-color: #f0f0f0;
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.btn-create {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-del {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

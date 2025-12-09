@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <main>
+    <h1>Gestor de Tareas</h1>
+    <form>
+      <input type="text" id="task-desc" placeholder="Descripción de la tarea" required>
+      <select id="task-priority">
+        <option value="Alta">Alta</option>
+        <option value="Media">Media</option>
+        <option value="Baja">Baja</option>
+      </select>
+      <button type="submit">Agregar tarea</button>
+    </form>
+
+    <button>Ordenar por prioridad</button>
+
+    <h2>Lista de Tareas</h2>
+    <ul id="task-list"></ul>
+
+    <p>Total de tareas en esta sesión: <span id="session-count">0</span></p>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

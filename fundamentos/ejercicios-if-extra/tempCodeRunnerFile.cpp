@@ -1,0 +1,1 @@
+cout<<"No tiene solución."<<endl;

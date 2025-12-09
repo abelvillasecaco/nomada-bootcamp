@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/style.css" rel="stylesheet">
+    <title>Práctica Tailwind</title>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-8">
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl items-center">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col items-center p-6 text-center transform transition hover:-translate-y-1 duration-300">
+        <div class="relative w-24 h-24 mb-4">
+          <img src="https://distillery.com/wp-content/uploads/2024/04/shutterstock_2287651241.jpg"
+              alt="Foto de perfil desarrollador"
+              class="w-full h-full object-cover rounded-full border-4 border-blue-50">
+          <span class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-800">Sarah Connor</h2>
+        <p class="text-sm text-blue-600 font-medium mb-2">Desarrolladora Full Stack</p>
+        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Apasionada por crear interfaces interactivas con Tailwind y Vite. Amante del café y el código limpio.</p>
+
+        <div class="flex gap-3 w-full">
+          <button class="flex-1 px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-600 transition cursor-pointer">Seguir</button>
+          <button class="flex-1 px-4 py-2 border border-slate-200 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50 transition cursor-pointer">Mensaje</button>
+        </div>
+      </div>
+
+
+    </main>
+  </body>
+</html>

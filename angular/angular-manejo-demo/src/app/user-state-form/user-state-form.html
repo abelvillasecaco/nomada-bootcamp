@@ -1,0 +1,94 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+  <div>
+    <label>Nombre completo: </label>
+    <input type="text" formControlName="fullName" placeholder="Ej: Ana Pérez" />
+    @if (fullName?.touched || fullName?.dirty) {
+      @if (fullName?.errors?.['required']) {
+        <small class="error">El nombre es obligatorio.</small>
+      }
+      @if (fullName?.errors?.['minlength']) {
+        <small class="error">Mínimo {{ fullName?.errors?.['minlength'].requiredLength }} caracteres (tienes {{ fullName?.errors?.['minlength'].actualLength }}).</small>
+      }
+    }
+    @if (emailSuggestions.length > 0) {
+      <div class="suggestions">
+        <small>Sugerencias de email:</small>
+        <ul>
+          @for (s of emailSuggestions; track s) {
+            <li class="hint" (click)="form.get('email')?.setValue(s)">{{ s }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Email: </label>
+    <input formControlName="email" type="email" placeholder="tu@correo.com" />
+    @if (email?.touched) {
+      @if (email?.errors?.['required']) {
+        <small class="error">El email es obligatorio.</small>
+      }
+      @if (email?.errors?.['email']) {
+        <small class="error">Introduce un email válido.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Password: </label>
+    <input type="password" formControlName="password" placeholder="Mínimo 8 caracteres" />
+    @if (password?.touched) {
+      @if (password?.errors?.['required']) {
+        <small class="error">La contraseña es obligatoria.</small>
+      }
+      @if (password?.errors?.['minlength']) {
+        <small class="error">Debe tener al menos {{ password?.errors?.['minlength'].requiredLength }} caracteres.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Confirmar contraseña: </label>
+    <input type="password" formControlName="confirmPassword" placeholder="Repite la contraseña" />
+    @if (confirmPassword?.touched) {
+      @if (confirmPassword?.errors?.['required']) {
+        <small class="error">Debes confirmar la contraseña.</small>
+      }
+      @if (form.errors?.['passwordsMismatch']) {
+        <small class="error">Las contraseñas no coinciden.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label>Edad (opcional): </label>
+    <input type="number" formControlName="age" />
+    @if (age?.touched) {
+      @if (age?.errors?.['min']) {
+        <small class="error">Debes tener al menos {{ age?.errors?.['min'].min }} años.</small>
+      }
+      @if (age?.errors?.['max']) {
+        <small class="error">La edad máxima es {{ age?.errors?.['max'].max }} años.</small>
+      }
+    }
+  </div>
+
+  <div class="checkbox-row">
+    <label><input type="checkbox" formControlName="subscribe" /> Quiero recibir noticias</label>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Enviar</button>
+</form>
+
+<section class="panel">
+  <h3>Panel en vivo</h3>
+  <p><strong>Estado:</strong> <span [class.valid]="liveStatus === 'VALID'">{{ liveStatus }}</span></p>
+  <p><strong>Valores (live):</strong></p>
+  <pre class="values">{{ liveValue | json }}</pre>
+
+  @if (liveStatus === 'PENDING') {
+    <p class="muted">Validación en curso…</p>
+  }
+</section>

@@ -1,0 +1,19 @@
+<div class="grid">
+  <div *ngFor="let producto of productos; trackBy: trackByProductoId"
+        class="card"
+        [ngClass]="{'en-oferta': producto.enOferta}">
+    <h3 [stockStatus]="producto.stock">
+      {{ producto.nombre }}
+    </h3>
+
+    <p>
+      {{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}
+    </p>
+
+    <p class="fecha">
+      {{ producto.fechaLanzamiento | formatoFecha }}
+    </p>
+
+    <p class="stock">Stock: {{ producto.stock ?? 'N/D' }}</p>
+  </div>
+</div>

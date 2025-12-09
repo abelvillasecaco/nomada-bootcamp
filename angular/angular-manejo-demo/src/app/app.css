@@ -1,0 +1,12 @@
+main {
+  padding: 1.5rem;
+  min-height: 100vh;
+  background: #f4f6fb;
+}
+
+h1 {
+  font-family: Inter, system-ui, sans-serif;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #0b2545;
+}

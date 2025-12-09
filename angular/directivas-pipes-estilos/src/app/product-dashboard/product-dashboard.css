@@ -1,0 +1,34 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  padding: 1rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.en-oferta {
+  border: 2px solid #2ecc71;
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.08);
+}
+
+.precio {
+  font-weight: 700;
+  margin: 0.25rem 0;
+}
+
+.fecha {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.stock {
+  font-size: 0.85rem;
+  color: #333;
+}

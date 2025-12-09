@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Gestor de Tareas</h1>
+
+  <button class="btn-create" (click)="crearTarea()">+ Crear tarea</button>
+
+  <hr>
+
+  @if (isLoading) {
+    <p class="loading">Conectando con el servidor...</p>
+  } @else {
+    <div class="list">
+      @for (task of tasks; track task.id) {
+        <div class="card" [class.done]="task.completed">
+          <div>
+            <strong>#{{ task.id }}</strong> - {{ task.title }}
+          </div>
+
+          <div class="actions">
+            <button (click)="toggleTarea(task)">
+              @if (task.completed) { ↩️ } @else { ✅ }
+            </button>
+
+            <button class="btn-del" (click)="borrarTarea(task.id!)">🗑️</button>
+          </div>
+        </div>
+      } @empty {
+        <p>No hay tareas. Empieza creando una.</p>
+      }
+    </div>
+  }
+</div>

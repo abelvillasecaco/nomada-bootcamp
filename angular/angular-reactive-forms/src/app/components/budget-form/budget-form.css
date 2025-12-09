@@ -1,0 +1,8 @@
+.budget-container { max-width: 700px; margin: 24px auto; padding: 12px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+form { display:flex; flex-direction:column; gap:12px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.expense-item { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+input { padding:8px; border-radius:6px; border:1px solid #ddd; flex:1; }
+.errors small { color:#b00020; font-size:0.85em; }
+button { padding:8px 12px; border-radius:6px; background:#007bff; color:#fff; border:none; cursor:pointer; }
+button:disabled { background:#aaa; cursor:not-allowed; }
