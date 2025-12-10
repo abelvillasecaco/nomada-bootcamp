@@ -1,1 +1,46 @@
-<p>product-dashboard works!</p>
+<div class="container">
+  <header>
+    <h1>Signal Shop</h1>
+
+    @if (authService.currentUser(); as user) {
+      <div class="user-info">
+        <span>Hola {{ user.name }}!</span>
+        <button (click)="authService.logut()">Salir</button>
+      </div>
+    } @else {
+      <button (click)="authService.login()">Iniciar sesión</button>
+    }
+  </header>
+
+  <div class="filters">
+    <button (click)="productService.setCategory('all')"
+            [class.active]="productService.selectedCategory() === 'all'">
+      Todos
+    </button>
+    <button (click)="productService.setCategory('electronics')"
+            [class.active]="productService.selectedCategory() === 'electronics'">
+            Electrónicos
+    </button>
+    <button (click)="productService.setCategory('jewelery')"
+            [class.active]="productService.selectedCategory() === 'jewelery'">
+            Joyería
+    </button>
+  </div>
+
+  <div class="product-grid">
+    @for (product of productService.filteredProducts(); track product.id) {
+      <div class="card">
+        <img [src]="product.image" [alt]="product.title">
+        <div class="card-body">
+          <h3>{{ product.title | slice: 0:30 }}</h3>
+          <p class="category">{{ product.category }}</p>
+          <p class="price">{{ product.price }}</p>
+        </div>
+      </div>
+    } @empty {
+      <div class="loading">
+        <p>Cargando productos...</p>
+      </div>
+    }
+  </div>
+</div>
