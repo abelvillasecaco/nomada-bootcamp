@@ -1,0 +1,39 @@
+$bg: #f5f5f5;
+$card-bg: #fff;
+$shadow: rgba(0, 0, 0, 0.1);
+
+body {
+  background: $bg;
+  font-family: JetBrains Mono, monospace;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.profile-card {
+  background: $card-bg;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 10px $shadow;
+  text-align: center;
+
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #555;
+  }
+}
