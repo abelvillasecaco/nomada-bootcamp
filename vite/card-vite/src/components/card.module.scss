@@ -5,6 +5,12 @@ $accent: var(--accent);
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: $shadow;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  display: inline-block;
+  width: 320px;
+  margin: 12px;
 
   .header {
     font-weight: 700;
@@ -16,5 +22,35 @@ $accent: var(--accent);
     font-size: 0.95rem;
     color: var(--muted);
     margin-bottom: 12px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  button {
+    margin-top: 2rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #eef2ff;
+    color: $accent;
+    font-weight: 600;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
+  }
+}
+
+.highlighted {
+  border-color: $accent;
+  background: linear-gradient(180deg, rgba(0, 102, 255, 0.05), rgba(255, 255, 255, 0));
+  button {
+    background: $accent;
+    color: #fff;
   }
 }
