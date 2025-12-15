@@ -1,0 +1,81 @@
+.dashboard-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: sans-serif;
+}
+
+.controls {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.badge {
+  background: #333;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+.buttons button {
+  margin-right: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-admin {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+}
+
+.btn-logout {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.public {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+.user {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+}
+
+.user {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+  border-width: 2px;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}

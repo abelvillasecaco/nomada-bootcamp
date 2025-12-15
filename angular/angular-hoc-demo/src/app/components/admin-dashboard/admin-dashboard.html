@@ -1,0 +1,41 @@
+<div class="dashboard-container">
+  <h1>Panel de control de roles</h1>
+  <div class="controls">
+    <p>Estado actual:
+      <strong>{{ authService.currentUser()?.name || 'No logueado' }}</strong>
+
+      @if(authService.currentUser(); as user){
+        <span class="badge">({{ user.role }})</span>
+      }
+    </p>
+
+    <div class="buttons">
+      <button (click)="authService.loginAsUser()">Loguear como empleado</button>
+      <button (click)="authService.loginAsAdmin()" class="btn-admin">Loguear como Admin</button>
+      <button (click)="authService.logout()" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="content-area">
+
+    <div class="card public">
+      <h3>Noticias públicas</h3>
+      <p>Este contenido lo puede ver todo el mundo, incluso los invitados.</p>
+    </div>
+
+    <div *appHasRole="'user'" class="card user">
+      <h3>Portal del empleado</h3>
+      <p>Aquí puedes ver tus nóminas y horarios.</p>
+      <button>Ver Nómina</button>
+    </div>
+
+    <div *appHasRole="'admin'" class="card admin">
+      <h3>Zona de administrador</h3>
+      <p>Configuración sensible del sistema.</p>
+      <button class="btn-danger">BORRAR USUARIOS</button>
+      <button class="btn-danger">REINICIAR SERVIDOR</button>
+    </div>
+  </div>
+</div>
