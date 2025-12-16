@@ -1,0 +1,23 @@
+<div class="page-container">
+  <h1>Inventario de productos</h1>
+  <p>Ejemplo de arquitectura Dumb/Smart</p>
+
+  <button class="btn-add" (click)="addProduct()">+ Añadir producto</button>
+
+  <hr>
+
+  <app-data-table
+    [data]="products()"
+    (rowClick)="onProductSelect($event)"
+  >
+    <app-column header="ID" key="id"></app-column>
+    <app-column header="Producto" key="name"></app-column>
+    <app-column header="Precio ($)" key="price"></app-column>
+    <app-column header="Stock" key="stock"></app-column>
+
+    <div custom-footer>
+      <strong>Total de registros:</strong> {{ products().length }} items.
+    </div>
+
+  </app-data-table>
+</div>

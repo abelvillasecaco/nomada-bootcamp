@@ -1,12 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { ProductsPage } from './pages/products-page/products-page';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  imports: [ProductsPage],
+  template: `<app-products-page></app-products-page>`,
 })
-export class App {
-  protected readonly title = signal('reusable-table-demo');
-}
+export class App {}

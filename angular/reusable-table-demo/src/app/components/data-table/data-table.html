@@ -1,0 +1,38 @@
+<div class="table-wraper">
+
+  <table>
+    <thead>
+      <tr>
+        @for (col of columns(); track col.key()) {
+          <th>{{ col.header() }}</th>
+        }
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (row of data(); track $index) {
+        <tr (click)="handleRowClick(row)">
+          @for (col of columns(); track col.key()) {
+            <td>
+              {{ row[col.key()] }}
+            </td>
+          }
+
+          <td>
+            <button class="btn-select">Ver</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="100%" class="empty-msg">No hay datos para mostrar</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="table-footer">
+    <ng-content select="[custom-footer]"></ng-content>
+  </div>
+
+</div>
