@@ -1,0 +1,13 @@
+<table>
+  <tbody>
+    @for (row of data(); track $index) {
+      <tr class="data-row" (click)="rowClick.emit(row)">
+        <td>{{ row }}</td>
+      </tr>
+    } @empty {
+      <tr class="empty-msg">
+        <td>Sin datos</td>
+      </tr>
+    }
+  </tbody>
+</table>
