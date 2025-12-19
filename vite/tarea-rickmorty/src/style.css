@@ -1,0 +1,19 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  background: #222;
+  color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.card img {
+  width: 100%;
+}
