@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './contador.css',
 })
 export class Contador {
+
   valor: number = 0;
 
   incrementar(): void {
