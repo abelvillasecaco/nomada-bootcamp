@@ -25,3 +25,4 @@ export class App {
 
 
 // performance.now()
+// Web Workers vs Service Workers

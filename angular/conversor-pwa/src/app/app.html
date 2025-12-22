@@ -1,0 +1,26 @@
+<h1>Conversor de monedas PWA</h1>
+
+@if (online()) {
+  <p style="color: green;">Online</p>
+} @else {
+  <p style="color: red;">Offline</p>
+}
+
+<input
+  type="number"
+  placeholder="Monto en dólares"
+  (input)="onAmountChange($event)"
+>
+
+<button (click)="convert()">Convertir</button>
+
+@if (result()) {
+  <ul>
+    @for (key of currencyKey(); track key) {
+      <li>
+        {{ key }}:
+        {{ result()![key] | number: '1.2-2' }}
+      </li>
+    }
+  </ul>
+}
