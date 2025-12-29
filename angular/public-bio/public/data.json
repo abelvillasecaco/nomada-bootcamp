@@ -1,0 +1,10 @@
+{
+  "name": "Edgard Villaseca",
+  "role": "Frontend Developer",
+  "bio": "I'm a Frontend Developer from Spain. I love to develop web applications and I'm currently working on a project with Angular and Firebase.",
+  "links": [
+    { "title": "Github", "url": "https://github.com/abelvillasecaco" },
+    { "title": "Linkedin", "url": "https://www.linkedin.com/in/abelvillaseca/" },
+    { "title": "Portafolio", "url": "https://abelvillaseca.com" }
+  ]
+}

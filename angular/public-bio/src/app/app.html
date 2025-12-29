@@ -1,0 +1,26 @@
+<main class="container">
+
+  @if (profileService.profileSignal(); as profile) {
+    <div class="card fade-in">
+      <div class="header">
+        <div class="avatar">{{ profile.name.charAt(0) }}</div>
+        <h1>{{ profile.name }}</h1>
+        <p class="role">{{ profile.role }}</p>
+      </div>
+
+      <p class="bio">{{ profile.bio }}</p>
+
+      <div class="links">
+        @for (link of profile.links; track link.title) {
+          <a [href]="link.url" target="_blank" class="btn-link">{{ link.title }}</a>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+  }
+
+</main>
