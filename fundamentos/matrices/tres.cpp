@@ -1,4 +1,5 @@
-// Modifica un elemento de una matriz.
+// Lee dos matrices y obtén la suma.
+
 #include <iostream>
 using namespace std;
 
@@ -7,6 +8,14 @@ void leerMatriz(int m[100][100], int f, int c){ //
     for(int j = 0; j < c; j++){ // recorre las columnas
       cout<<"Ingresa el elemento ["<<i<<"]["<<j<<"]: ";
       cin>>m[i][j]; // m[2][2] = 4
+    }
+  }
+}
+
+void sumarMatriz(int a[100][100], int b[100][100], int r[100][100], int f, int c){
+  for(int i = 0; i < f; i++){
+    for(int j = 0; j < c; j++){
+      r[i][j] = a[i][j] + b[i][j];
     }
   }
 }
@@ -22,30 +31,24 @@ void imprimirMatriz(int m[100][100], int f, int c){
 
 int main() {
 
-    int matriz[100][100]; // Límite
-    int filas, columnas, fCambiar, cCambiar, valorNuevo;
+    int matrizA[100][100], matrizB[100][100], matrizR[100][100]; // Límite
+    int filas, columnas;
 
     cout<<"Ingresa el número de filas: ";
     cin>>filas; // 3
     cout<<"Ingresa el número de columnas: ";
     cin>>columnas; // 3
 
-    leerMatriz(matriz, filas, columnas); // pase por referencia
+    cout<<"Datos para la matriz A: "<<endl;
+    leerMatriz(matrizA, filas, columnas);
 
-    cout<<"\nMatriz ingresada:\n";
-    imprimirMatriz(matriz, filas, columnas);
+    cout<<"Datos para la matriz B: "<<endl;
+    leerMatriz(matrizB, filas, columnas);
 
-    cout<<"Fila a modificar: ";
-    cin>>fCambiar;
-    cout<<"Columna a modificar: ";
-    cin>>cCambiar;
-    cout<<"Nuevo valor: ";
-    cin>>valorNuevo;
+    sumarMatriz(matrizA, matrizB, matrizR, filas, columnas);
 
-    matriz[fCambiar][cCambiar] = valorNuevo;
-
-    cout<<"\nMatriz modificada: \n";
-    imprimirMatriz(matriz, filas, columnas);
+    cout<<"Resultado: "<<endl;
+    imprimirMatriz(matrizR, filas, columnas);
 
     return 0;
 }
