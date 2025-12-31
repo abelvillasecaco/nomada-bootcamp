@@ -1,0 +1,15 @@
+---
+const { project } = Astro.props;
+const { title, description, publishDate, tags, link, image } = project.data;
+---
+
+<article>
+  <div>
+    <img
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+  </div>
+</article>

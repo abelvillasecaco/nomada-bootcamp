@@ -1,0 +1,37 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+const { title, description = "Portafolio de Desarrollador" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <ClientRouter />
+  </head>
+  <body class="antialiased">
+    <header class="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md boder-b border-white/10">
+      <nav class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" class="font-bold text-xl text-brand-primary">DevPortafolio</a>
+        <div class="space-x-6 text-sm font-medium">
+          <a href="#proyectos" class="hover:text-brand-primary transition-colors">Proyectos</a>
+          <a href="#sobre-mi" class="hover:text-brand-primary transition-colors">Sobre mí</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="grow pt-24 px-4">
+      <slot />
+    </main>
+
+    <footer class="py-8 text-center text-gray-500 text-sm">
+      &copy; {new Date().getFullYear()} Nómada Bootcamp - Astro 5 & Tailwind 4
+    </footer>
+  </body>
+</html>
