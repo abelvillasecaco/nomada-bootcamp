@@ -1,0 +1,16 @@
+<main class="container">
+  <h1>Angular SSR Animations</h1>
+  <div class="grid" [@listAnimation]="products().length">
+    @for(product of products(); track product.id; let i = $index){
+      <div class="card"
+        [@hoverAnimation]="product.state"
+        (mouseenter)="setHoverState(i, 'hover')"
+        (mouseleave)="setHoverState(i, 'normal')">
+
+        <h2>{{product.name}}</h2>
+        <p class="price">${{product.price}}</p>
+        <button>Comprar</button>
+      </div>
+    }
+  </div>
+</main>
