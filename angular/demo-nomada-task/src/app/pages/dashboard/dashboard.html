@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Mis tableros</h1>
+
+  <div class="create-box">
+    <input #newBoardInput placeholder="Nombre del tablero..." (keyup.enter)="create(newBoardInput)">
+    <button (click)="create(newBoardInput)">+ Crear tablero</button>
+  </div>
+
+  <div class="boards-grid">
+    @for (board of store.boards(); track board.id) {
+      <a [routerLink]="['/board', board.id]" class="board-card">
+        <h3>{{ board.title }}</h3>
+        <small>Creado: {{ board.createdAt | date: 'shortDate' }}</small>
+      </a>
+    }
+  </div>
+</div>

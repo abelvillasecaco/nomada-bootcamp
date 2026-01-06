@@ -1,0 +1,37 @@
+<div class="board-layout">
+
+  <header>
+    <a routerLink="/" class="btn-back">← Volver</a>
+    <h2>{{ store.currentBoard()?.title }}</h2>
+  </header>
+
+  <div class="columns-wrapper" cdkDropListGroup>
+
+    @for (col of store.currentBoard()?.columns; track col.id) {
+
+      <div class="column">
+        <div class="column-header">
+          <h3>{{ col.title }}</h3>
+          <span class="count">{{ col.tasks.length }}</span>
+        </div>
+
+        <div
+          class="task-list"
+          cdkDropList
+          [id]="col.id"
+          [cdkDropListData]="col.tasks"
+          (cdkDropListDropped)="drop($event)">
+
+          @for (task of col.tasks; track task.id) {
+            <app-task-card [task]="task" cdkDrag></app-task-card>
+          }
+
+        </div>
+
+        <button class="btn-add-task" (click)="addTask(col.id)">+ Añadir tarjeta</button>
+      </div>
+
+    }
+
+  </div>
+</div>
