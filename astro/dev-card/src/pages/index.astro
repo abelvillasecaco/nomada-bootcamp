@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DeveloperCard from '../components/DeveloperCard.astro';
+---
+<main class="min-h-screen flex items-center justify-center bg-gray-100">
+  <Layout>
+    <DeveloperCard
+      nombre="Abel Villaseca"
+      rol="Full Stack Developer"
+      experiencia={5}
+      tecnologias={['React', 'Next.js', 'Node.js', 'MongoDB', 'Express']}
+    />
+  </Layout>
+</main>
+
