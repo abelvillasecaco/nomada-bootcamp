@@ -1,3 +1,5 @@
+-- INTRODUCCIÓN A SQL
+
 -- PASO 1: Crear base de datos:
 
 -- CREATE DATABASE nomadaDB;
@@ -7,7 +9,7 @@ USE nomadaDB;
 
 -- PASO 3: Crear las tablas
 CREATE TABLE Usuarios (
-    
+
     id_usuario INT PRIMARY KEY IDENTITY, --autoincrementa
     nombre VARCHAR(50),
     email VARCHAR(100) UNIQUE,
