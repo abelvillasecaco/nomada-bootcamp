@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import SkillCard from '../components/SkillCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+---
+
+<Layout>
+  <Hero
+    name="Diego Cañari"
+    role="Desarrollador Full Stack"
+    image="perfil.jpg"
+  />
+
+  <About>
+    Soy desarrolador nivel experto con enforque en arquitectura de software,
+    buenas prácticas y documentación clara usando la programación moderna.
+  </About>
+
+  <section class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+    <SkillCard name="JavaScript" icon="🟨" level="Avanzado" />
+    <SkillCard name="Astro" icon="🚀" level="Intermedio" />
+    <SkillCard name="Node.js" icon="🟢" level="Intermedio" />
+    <SkillCard name="Tailwind CSS" icon="🫟" level="Avanzado" />
+  </section>
+
+  <section class="mt-16 grid md:grid-cols-2 gap-6">
+    <ProjectCard
+      title="Sistema de Autenticación"
+      description="Login con cookies y rutas protegidas."
+      link="#"
+    />
+    <ProjectCard
+      title="Sistema de Autenticación"
+      description="Login con cookies y rutas protegidas."
+      link="#"
+    />
+  </section>
+
+
+</Layout>

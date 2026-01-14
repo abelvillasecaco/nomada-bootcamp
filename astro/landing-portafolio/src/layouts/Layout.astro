@@ -1,0 +1,30 @@
+---
+import '../styles/global.css'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Portafolio Dev</title>
+	</head>
+	<body class="bg-gray-950 text-gray-100 font-sans">
+		<header class="bg-gray-900 border-b border-gray-800">
+      <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between">
+        <span class="font-bold text-lg">Mi Portafolio</span>
+        <span class="text-sm text-gray-400">Astro 5.16</span>
+      </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-gray-800 text-center py-6 text-sm text-gray-500">
+      &copy; 2026 - Desarrollado con Astro y Tailwind
+    </footer>
+	</body>
+</html>

@@ -1,0 +1,9 @@
+---
+const { name, icon, level } = Astro.props;
+---
+
+<div class="bg-gray-900 rounded-xl border border-gray-800 text-center">
+  <div class="text-3xl mb-2">{icon}</div>
+  <h3 class="font-semibold">{name}</h3>
+  <p class="text-sm text-gray-400">{level}</p>
+</div>
