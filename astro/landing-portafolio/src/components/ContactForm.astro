@@ -1,0 +1,77 @@
+<section class="mt-16 max-w-md mx-auto">
+  <form
+    id="contactForm"
+    class="bg-gray-900 p-6 rounded-xl border border-gray-800 space-y-4"
+  >
+
+  <h2 class="text-2xl font-semibold">Contacto</h2>
+  <input
+    id="name"
+    type="text"
+    placeholder="Nombre"
+    class="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <input
+    id="email"
+    type="email"
+    placeholder="Correo"
+    class="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <textarea
+    id="message"
+    placeholder="Mensaje"
+    rows="4"
+    class="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  ></textarea>
+
+  <p id="formStatus" class="text-sm text-red-400 hidden"></p>
+
+  <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 transition py-2 rounded font-semibold">
+    Enviar
+  </button>
+  </form>
+</section>
+
+<script>
+
+  (() => {
+    const form = document.getElementById("contactForm") as HTMLFormElement | null;
+    const status = document.getElementById("formStatus") as HTMLParagraphElement | null;
+
+    if(!form || !status) return;
+
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById("name") as HTMLInputElement;
+      const emailInput = document.getElementById("email") as HTMLInputElement;
+      const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if(!name || !email || !message){
+        status.textContent = "Todos los campos son obligatorios.";
+        status.classList.remove("hidden");
+        status.classList.add("text-red-400");
+        return;
+      }
+
+      if(!email.includes("@")){
+        status.textContent = "Correo no válido.";
+        status.classList.remove("hidden");
+        status.classList.add("text-red-400");
+        return;
+      }
+
+      status.textContent = "Mensaje enviado correctamente.";
+      status.classList.remove("hidden", "text-red-400");
+      status.classList.add("text-green-400");
+
+      form.reset();
+    });
+  })();
+</script>
