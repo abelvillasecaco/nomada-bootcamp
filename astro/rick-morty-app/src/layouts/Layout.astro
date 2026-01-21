@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Rick & Morty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-[#202329] text-white font-sans min-h-screen flex flex-col">
+
+    <nav class="w-full bg-white text-black p-4 shadow-[0_0_15px_rgba(151,206,76,0.5)]">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-3xl font-['Creepster'] text-[#202329] hover:text-[#97ce4c] transition-colors">
+          Rick & Morty <span class="text-sm fonst-sans font-bold text-gray-500">App</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="grow max-w-6xl mx-auto w-full p-6">
+      <slot />
+    </main>
+
+    <footer class="bg-[#24282f] py-8 text-center border-t border-gray-700 mt-8">
+      <p class="text-gray-400">Desarrollado por <span class="text-[#97ce4c]">Nómada Bootcamp</span></p>
+    </footer>
+
+	</body>
+</html>

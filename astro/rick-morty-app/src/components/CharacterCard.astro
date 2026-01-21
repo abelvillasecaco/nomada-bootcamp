@@ -1,0 +1,46 @@
+---
+const { character } = Astro.props;
+const { id, name, image, status, species, location } = character;
+
+const statusColor = ({
+  Alive: 'bg-green-500',
+  Dead: 'bg-red-500',
+  unknown: 'bg-gray-500',
+} as Record<string, string>)[status] || 'bg-gray-500';
+---
+
+<article class="bg-[#3c3e44] rounded-xl overflow-hidden shadow-lg flex flex-col sm:flex-row hover:shadow-[0_0_20px_rgba(151,206,76,0.4)] transition-all duration-300 group">
+
+  <div class="sm:w-2/5 overflow-hidden">
+    <img
+      src={image}
+      alt={name}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="p-4 sm:w-3/5 flex flex-col justify-between">
+    <div>
+      <a href={`/character/${id}`} class="text-2xl font-black hover:text-[#97ce4c] transition-colors leading-tight block mb-1">
+        {name}
+      </a>
+
+      <div class="flex items-center gap-2 mb-4">
+        <span class={`w-2.5 h-2.5 rounded-full ${statusColor}`}></span>
+        <span class="text-sm font-medium text-gray-100">{status} - {species}</span>
+      </div>
+
+      <div class="mb-3">
+        <p class="text-gray-400 text-xs font-bold uppercase tracking-wide">Última ubicación conocida:</p>
+        <p class="text-gray-100 hover:text-[#97ce4c] text-sm">{location.name}</p>
+      </div>
+
+      <a href={`/character/${id}`} class="mt-2 text-xs font-bold text-[#97ce4c] border border-[#97ce4c] rounded-lg px-3 py-2 text-center hover:bg-[#97ce4c] hover:text-black transition-colors self-start">
+        Ver Detalles
+      </a>
+
+    </div>
+  </div>
+
+</article>
