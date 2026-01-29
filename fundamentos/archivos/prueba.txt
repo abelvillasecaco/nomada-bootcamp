@@ -1,1 +1,3 @@
-Hola, esto es una prueba.
+Hola, esto es una prueba,
+sobre escritura de archivos
+en C++.
