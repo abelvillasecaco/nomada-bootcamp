@@ -36,7 +36,7 @@ int main() {
     cout<<"El valor es: "<<fibonacci(n)<<endl;
 
     cout<<"Serie Fibonacci: "<<endl;
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i <= n; i++){
       cout<<fibonacci(i)<<" ";
     }
 
