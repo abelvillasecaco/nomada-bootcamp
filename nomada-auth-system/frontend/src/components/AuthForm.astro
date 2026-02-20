@@ -1,0 +1,145 @@
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-gray-100">
+
+  <div class="flex justify-center mb-6">
+    <button id="toggle-login" class="px-4 py-2 font-bold text-blue-600 border-b-2 border-blue-600">Login</button>
+    <button id="toggle-register" class="px-4 py-2 font-bold text-gray-400">Registro</button>
+  </div>
+
+  <form id="auth-form" class="space-y-4">
+    <div id="name-field" class="hidden">
+      <label class="block text-sm font-medium">Nombre</label>
+      <input type="text" name="nombre" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium">Email</label>
+      <input type="email" name="email" required class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div class="relative">
+      <label class="block text-sm font-medium">Contraseña</label>
+      <input type="password" id="password" name="password" required class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+      <button type="button" id="toggle-password" class="absolute right-3 top-8 text-gray-500">
+        👁️
+      </button>
+    </div>
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+      Continuar
+    </button>
+  </form>
+
+  <p id="message" class="mt-4 text-center text-sm font-semibold"></p>
+
+</div>
+
+<script>
+import { date } from "astro:schema";
+
+  let isLogin = true;
+  const form = document.getElementById('auth-form') as HTMLFormElement;
+  const nameField = document.getElementById('name-field');
+  const btnLogin = document.getElementById('toggle-login');
+  const btnRegister = document.getElementById('toggle-register');
+  const msg = document.getElementById('message');
+  const passInput = document.getElementById('password') as HTMLInputElement;
+  const togglePass = document.getElementById('toggle-password');
+
+  const API_URL = 'http://localhost:3000/api/auth';
+
+  btnLogin?.addEventListener('click', () => {
+    isLogin = true;
+    nameField?.classList.add('hidden');
+
+    // Estilos activos
+    btnLogin.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+    btnLogin.classList.remove('text-gray-400');
+
+    // Estilos inactivos
+    btnLogin.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+    btnLogin.classList.add('text-gray-400');
+
+    if(msg) msg.innerText = '';
+  });
+
+  btnRegister?.addEventListener('click', () => {
+    isLogin = false;
+    nameField?.classList.remove('hidden');
+
+    // Estilos activos
+    btnRegister.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+    btnRegister.classList.remove('text-gray-400');
+
+    // Estilos inactivos
+    btnRegister.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+    btnRegister.classList.add('text-gray-400');
+
+    if(msg) msg.innerText = '';
+  });
+
+  togglePass?.addEventListener('click', () => {
+    const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passInput.setAttribute('type', type);
+    togglePass.textContent = type === 'password' ? '👁️' : '🙈';
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if(msg){
+      msg.innerText = 'Procesando...';
+      msg.className = 'mt-4 text-center text-sm font-semibold text-blue-500';
+    }
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    if(!data.email || !data.password || (!isLogin && !data.nombre)){
+      if(msg){
+        msg.innerText = 'Por favor, llena todos los campos.';
+        msg.className = 'mt-4 text-center text-sm font-semibold text-red-500';
+      }
+      return;
+    }
+
+    const endpoint = isLogin ? '/login' : '/register';
+
+    try{
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if(response.ok) {
+
+        localStorage.setItem('token', result.token);
+
+        if(msg){
+          msg.innerText = 'Proceso existoso, redirigiendo...';
+          msg.className = 'mt-4 text-center text-sm font-semibold text-green-600'
+        }
+
+        setTimeout(() => {
+          window.location.href = '/home';
+        }, 1000);
+
+      }else{
+        if(msg){
+          msg.innerText = result.msg || 'Ocurrió un error inesperado';
+          msg.className = 'mt-4 text-center text-sm font-semibold text-red-600'
+        }
+      }
+    }catch(error){
+      console.error('Error de red: ', error);
+      if(msg){
+        msg.innerText = 'Error al conectar con el servidor';
+        msg.className = 'mt-4 text-center text-sm font-semibold text-red-600'
+      }
+    }
+  });
+</script>

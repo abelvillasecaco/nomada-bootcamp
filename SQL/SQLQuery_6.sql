@@ -135,3 +135,77 @@ GROUP BY categoria;
 SELECT nombre_producto, COUNT(*) AS NumeroDeTransacciones, AVG(precio_unitario) AS PrecioPromedio
 FROM Ventas
 GROUP BY nombre_producto
+
+-- Queremos listar solo aquellas categorías que han tenido un total de ventas (transacciones) superior a 3.
+
+SELECT categoria, COUNT(*) AS TotalTransacciones
+FROM Ventas
+GROUP BY categoria
+HAVING COUNT(*) >= 3;
+
+-- Queremos identificar los productos cuyo ingreso total por todas sus ventas es mayor a $500.
+
+SELECT * FROM Ventas;
+
+SELECT nombre_producto, SUM(cantidad * precio_unitario) AS IngresoTotal
+FROM Ventas
+GROUP BY nombre_producto
+HAVING SUM(cantidad * precio_unitario) > 500
+
+INSERT INTO Ventas (nombre_producto, categoria, vendedor, cantidad, precio_unitario, fecha_venta)
+VALUES
+    ('Silla Gamer', 'Muebles', 'Ana', 8, 500.00, '2023-03-10'),
+    ('Escritorio', 'Muebles', 'Carlos', 4, 400.00, '2023-03-15'),
+    ('Manguera', 'Jardín', 'Beatriz', 5, 20.00, '2023-03-05');
+GO
+
+-- Listar las categorías y la suma de unidades vendidas, pero solo para las ventas que ocurrieron en marzo de 2023, 
+-- y solo incluir categorías donde el total de unidades vendidas en ese mes fue mayor a 10.
+
+-- WHERE => DONDE
+-- HAVING => TENIENDO
+
+SELECT categoria, SUM(cantidad) AS TotalUnidadesMarzo
+FROM Ventas
+WHERE fecha_venta >= '2023-03-01' AND fecha_venta <= '2023-03-31'
+GROUP BY categoria
+HAVING SUM(cantidad) > 10;
+
+-- Listar los productos y sus precios unitarios para aquellas ventas cuyo PrecioUnitario es mayor que el promedio de PrecioUnitario de todas las ventas.
+
+SELECT nombre_producto, precio_unitario, categoria
+FROM Ventas
+WHERE precio_unitario > (SELECT AVG(precio_unitario) FROM Ventas);
+
+-- Mostrar todas las ventas que corresponden a productos de la categoría 'Libros'. (Aunque simple con WHERE Categoria = 'Libros', 
+-- demuestra el uso de IN con subconsulta).
+
+SELECT * FROM Ventas
+WHERE nombre_producto IN (
+    SELECT DISTINCT nombre_producto
+    FROM Ventas
+    WHERE categoria = 'Libros'
+);
+
+-- Queremos ver los detalles de cada venta individualmente, pero también incluir una columna adicional que muestre 
+-- el precio unitario promedio de todas las ventas como referencia.
+
+SELECT nombre_producto, precio_unitario, 
+       (SELECT AVG(precio_unitario) FROM Ventas) AS PrecioPromedioGlobal,
+       precio_unitario - (SELECT AVG(precio_unitario) FROM Ventas) AS Diferencia
+FROM Ventas;
+
+
+-- Queremos obtener el precio unitario promedio, pero considerando únicamente las ventas que ocurrieron después del 12 de marzo de 2023.
+
+SELECT AVG(precio_unitario) AS PromedioDespuesMarzo
+FROM Ventas
+WHERE fecha_venta > '2023-03-12';
+
+SELECT * 
+FROM Ventas
+WHERE precio_unitario > (
+    SELECT AVG(precio_unitario)
+    FROM Ventas
+    WHERE fecha_venta > '2023-03-12'
+) AND fecha_venta > '2023-03-12';
