@@ -10,5 +10,56 @@ import Layout from "../layouts/Layout.astro";
         Cerrar sesión
       </button>
     </nav>
+
+    <main class="max-w-4xl mx-auto mt-10 p-6">
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">¡Bienvenido,
+          <span id="user-name" class="text-blue-600">...</span>
+        </h2>
+
+        <p class="text-gray-600 mb-6">Has iniciado sesión correctamente. Esta es una ruta protegida; solo
+          puedes verla si tienes token válido almacenado.
+        </p>
+
+        <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
+          <h3 class="font-semibold text-blue-800 mb-2">Estado de la sesión:</h3>
+          <p class="text-sm text-blue-600 break-all">
+            <strong>Token actual: </strong> <span id="token-preview">Cargando...</span>
+          </p>
+        </div>
+      </div>
+    </main>
   </div>
 </Layout>
+
+<script>
+  const token = localStorage.getItem('token');
+
+  if(!token){
+    window.location.href = '/';
+  }else{
+    const tokenPreview = document.getElementById('token-preview');
+    if(tokenPreview) tokenPreview.innerText = token.substring(0, 50) + '...';
+
+    try{
+      const payloadBase64 = token.split('.')[1];
+      const payloadDecoded = atob(payloadBase64);
+      const user = JSON.parse(payloadDecoded);
+
+      const userNameSpan = document.getElementById('user-name');
+      if(userNameSpan) userNameSpan.innerText = user.nombre;
+
+    }catch(error){
+      console.error('Token inválido: ', error);
+      localStorage.removeItem('token');
+      window.location.href = '/';
+    }
+  }
+
+  const btnLogout = document.getElementById("logout-btn");
+  btnLogout?.addEventListener('click', ()=> {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  })
+</script>

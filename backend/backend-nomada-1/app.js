@@ -1,64 +1,80 @@
 const express = require('express');
-
 const app = express();
+app.use(express.json());
 
 const PORT = 3000;
 
-// .get()
-// '/' (el home)
-// (req, res)
+const usuarios = [
+  { id: 1, nombre: "Abel", rol: "Admin" },
+  { id: 2, nombre: "María", rol: "Estudiante" },
+  { id: 3, nombre: "Juan", rol: "Estudiante" },
+];
 
-app.get('/', (req, res) => {
-  res.send('Hola mi servidor está corriendo.');
+const libros = [
+  { id: 1, titulo: "El Principito", genero: "Ficción" },
+  { id: 2, titulo: "Clean Code", genero: "Tecnología" },
+  { id: 3, titulo: "Harry Potter", genero: "Ficción" }
+]
+
+app.get('/', (req, res) => { // home
+  res.send('API Semana 2 funcionando.');
 });
 
-app.get('/info', (req, res) => {
-  res.json({
-    bootcamp: "Nómada Bootcamp",
-    curso: "Backend con Node.js",
-    profesor: "Abel Villaseca",
-    estado: "Activo"
+// 1. ROUTE PARAMS (:id) => Busca un usuario en específico
+app.get('/usuarios/:id', (req, res) => {
+
+  const idBusqueda = parseInt(req.params.id);
+
+  const usuarioEncontrado = usuarios.find(u => u.id === idBusqueda);
+
+  if(!usuarioEncontrado){
+    return res.status(404).json({ error: "Usuario no encontrado." });
+  }
+
+  res.json(usuarioEncontrado);
+});
+
+// 2. QUERY PARAMS (?rol=Admin) => Filtrar datos de una lista
+app.get('/usuarios', (req, res) => {
+  const rolBuscado = req.query.rol;
+
+  if(rolBuscado){
+    const resultados = usuarios.filter(u => u.rol === rolBuscado); // API REST
+    return res.json(resultados);
+  }
+
+  res.json(usuarios);
+});
+
+app.post('/usuarios', (req, res) => {
+  const nuevosDatos = req.body;
+
+  if(!nuevosDatos.nombre || !nuevosDatos.rol){
+    return res.status(400).json({
+      error: "Datos incompletos. Se requiere nombre y rol."
+    });
+  }
+
+  const nuevoUsuario = {
+    id: usuarios.length + 1,
+    nombre: nuevosDatos.nombre,
+    rol: nuevosDatos.rol
+  };
+
+  usuarios.push(nuevoUsuario);
+
+  res.status(201).json({
+    mensaje: "Usuario creado con éxito.",
+    usuario: nuevoUsuario
   });
 });
 
-app.get('/saludo/:nombre', (req, res) => {
-  const nombreUsuario = req.params.nombre;
-
-  res.json({
-    mensaje: `Hola ${nombreUsuario}, bienvenido al backend.`,
-    timestamp: new Date()
-  });
-});
-
-app.get('/perfil', (req, res) => {
-  res.json({
-    nombre: "Abel",
-    edad: 32,
-    pais: "Perú",
-    hobbies: ["Programar", "Escuchar música", "Leer"]
-  });
-});
-
-app.get('/suma/:num1/:num2', (req, res) => {
-
-  const n1 = req.params.num1;
-  const n2 = req.params.num2;
-
-  const suma = parseInt(n1) + parseInt(n2);
-
-  res.json({
-    operacion: "Suma",
-    valor1: n1,
-    valor2: n2,
-    resultado: suma
-  });
-});
-
-app.use((req, res) => {
-  res.status(404).json({
-    error: "Ruta no encontrada.",
-    mensaje: "Parece que te perdiste en el servidor."
-  });
+app.get('/libros', (req, res) => {
+  const generoFiltro = req.query.genero;
+  if(generoFiltro){
+    return res.json(libros.filter(l => l.genero === generoFiltro));
+  }
+  res.json(libros);
 });
 
 app.listen(PORT, () => {
